@@ -25,7 +25,7 @@ var insert = function(intervals, newInterval) {
         }
     }
     if (start === 10**5 && end === -1) result.push(newInterval);
-    else result.push([Math.min(newInterval[0], intervals[start][0]), Math.max(newInterval[1], intervals[end][1])])
+    else result.push([Math.min(newInterval[0], intervals[start][0]), Math.max(newInterval[1], intervals[end][1])]);
     for (let i = end_index+1; i < intervals.length; i++) result.push(intervals[i]);
 
     return result;
