@@ -16,6 +16,6 @@ var combine = function(n, k) {
             }
         }
     }
-    dfs([])
+    dfs([]);
     return result;
 };
