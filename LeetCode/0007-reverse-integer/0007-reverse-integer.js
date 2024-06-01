@@ -3,18 +3,12 @@
  * @return {number}
  */
 var reverse = function(x) {
-    var x_array = x.toString().split("").reverse()
-    var result;
-    if (x_array[x_array.length-1] === "-") {
-        x_array.pop();
-        x_array = x_array.join("");
-        result = -Number(x_array);
+    x = x.toString().split('').reverse().join('');
+    if (x[x.length-1] === '-') {
+        x = -Number(x.replace('-', ''));
     } else {
-        x_array = x_array.join("");
-        result = Number(x_array);
+        x = Number(x);
     }
-    if (result <= (-2)**31 || result >= 2**31-1) {
-        return 0;
-    }
-    return result;
+    if (2**31-1 <= x || -(2**31) >= x) return 0;
+    return x;
 };
