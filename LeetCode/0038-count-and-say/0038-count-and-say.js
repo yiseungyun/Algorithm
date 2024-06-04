@@ -3,27 +3,19 @@
  * @return {string}
  */
 var countAndSay = function(n) {
-    function count_number(number) {
+    var say = "1";
+    for (let number = 2; number <= n; number++) {
         var count = 1;
         var result = "";
-        for (let i = 0; i < number.length-1; i++) {
-            if (number[i] === number[i+1]) count++;
+        for (let i = 0; i < say.length-1; i++) {
+            if (say[i] === say[i+1]) count++;
             else {
-                result += (count.toString()+number[i]);
+                result += count.toString()+say[i];
                 count = 1;
             }
         }
-        if (count > 0) {
-            result += (count.toString()+number[number.length-1]);
-        } else {
-            result += "1"+(number[number.length-1]);
-        }
-        return result;
+        result += count.toString()+say[say.length-1];
+        say = result;
     }
-
-    var previous = "1";
-    for (let i = 1; i < n; i++) {
-        previous = count_number(previous);
-    }
-    return previous;
+    return say;
 };
