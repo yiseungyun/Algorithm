@@ -1,11 +1,14 @@
 function solution(s, skip, index) {
-    var result = '';
-    var alphabet = Array.from({length: 26}, (_, i) => String.fromCharCode(i+97));
-    var skip_list = skip.split("").sort((a, b) => a > b ? -1 : 1);
-    for (let i = 0; i < skip_list.length; i++) {
-        alphabet.splice(skip_list[i].charCodeAt()-97, 1);
+    var skip_list = skip.split('').sort((a, b) => b.localeCompare(a));
+    alphabet = [];
+    alpha_dict = {};
+    var result = "";
+    for (let i = 97; i < 123; i++) {
+        alphabet.push(String.fromCharCode(i));
     }
-    var alpha_dict = {};
+    for (const skip of skip_list) {
+        alphabet.splice(skip.charCodeAt()-97, 1);
+    }
     for (let i = 0; i < alphabet.length; i++) {
         alpha_dict[alphabet[i]] = i;
     }
