@@ -5,15 +5,16 @@
  */
 var combine = function(n, k) {
     var result = [];
-    function dfs(list, range) {
+    function combination(list) {
         if (list.length === k) {
             result.push(list);
             return;
         }
-        for (let i = 0; i < range.length; i++) {
-            dfs([...list, range[i]], range.slice(i+1));
+        for (let i = 1; i <= n; i++) {
+            if (list.length === 0) combination([i]);
+            else if (list[list.length-1] < i) combination([...list, i]);
         }
     }
-    dfs([], Array.from({length: n}, (_, i) => i+1));
+    combination([]);
     return result;
 };
