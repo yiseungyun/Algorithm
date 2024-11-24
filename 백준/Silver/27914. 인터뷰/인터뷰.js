@@ -18,37 +18,30 @@ const solution = (input) => {
   const students = input[1].split(" ").map(Number);
   let questions = input[2].split(" ").map(Number);
   let result = [];
+  const DP = interviewCount(students, N, K);
 
   questions.forEach(question => {
-    result.push(interviewCount(students, question, K, Q));
+    result.push(DP[question-1]);
   });
 
   return result;
 }
 
-const interviewCount = (students, question, K, Q) => {
+const interviewCount = (students, question, K) => {
   let length = 0;
   let result = 0;
+  let DP = Array(question).fill(0);
 
   for (let i = 0; i < question; i++) {
     if (students[i] !== K) {
       length++;
     } else {
-      result += getInterviewCount(length);
+      result += (length * (length + 1)) / 2;
       length = 0;
     }
+
+    DP[i] = result + ((length * (length + 1)) / 2);
   }
 
-  result += getInterviewCount(length);
-
-  return result;
-}
-
-const getInterviewCount = (length) => {
-  let result = 0;
-  for (let i = 1; i <= length; i++) {
-    result += (length-i+1);
-  }
-
-  return result;
+  return DP;
 }
