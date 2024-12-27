@@ -4,33 +4,36 @@
  * @return {string}
  */
 
-var gcdOfStrings = function(str1, str2) {
-    const length1 = str1.length;
-    const length2 = str2.length;
-    let gcdNum;
-
-    if (length1 > length2) {
-        gcdNum = gcd(length1, length2);
-    } else {
-        gcdNum = gcd(length2, length1);
-    }
-
-    const subStr = length1 > length2 ? str2.slice(0, gcdNum) : str1.slice(0, gcdNum);
-    for (let i = 0; i < str1.length; i += subStr.length) {
-        if (str1.slice(i, i+subStr.length) !== subStr) {
-            return ""
-        }
-    }
-    for (let i = 0; i < str2.length; i += subStr.length) {
-        if (str2.slice(i, i+subStr.length) !== subStr) {
-            return ""
+const gcdOfStrings = function(str1, str2) {
+    const gcdNumber = gcd(str1.length, str2.length);
+    
+    const commonString = str1.slice(0, gcdNumber);
+    
+    for (let i = 0; i < str1.length; i += gcdNumber) {
+        if (str1.slice(i, i+gcdNumber) !== commonString) {
+            return "";
         }
     }
 
-    return subStr;
-};
+    for (let i = 0; i < str2.length; i += gcdNumber) {
+        if (str2.slice(i, i+gcdNumber) !== commonString) {
+            return "";
+        }
+    }
 
-const gcd = (a, b) => {
-    if (b === 0) return a;
-    else return gcd(b, a%b);
+    return commonString;
+}
+
+const gcd = (num1, num2) => {
+    let a = num1 > num2 ? num1 : num2;
+    let b = num1 > num2 ? num2 : num1;
+    let n;
+
+    while (b !== 0) {
+        n = a % b;
+        a = b;
+        b = n; 
+    }
+
+    return a;
 }
