@@ -15,22 +15,21 @@ readline.on('line', (line) => {
 
 const solution = (input) => {
   const [N, M] = input[0].split(" ").map(Number);
-  let trees = input[1].split(" ").map(Number);
-  trees.sort((a, b) => a - b);
-  
-  let left = 0, right = Math.max(...trees);
+  const tree = input[1].split(" ").map(Number);
+
+  let left = 1, right = Math.max(...tree);
+
   while (left <= right) {
     const mid = Math.floor((left+right)/2);
-    let sumOfTrees = 0;
-    for (const tree of trees) {
-      if (tree > mid) {
-        sumOfTrees += tree - mid;
-      }
+    let sum = 0;
+
+    for (const t of tree) {
+      sum = sum + (t >= mid ? t-mid : 0);
     }
 
-    if (sumOfTrees === M) {
+    if (sum === M) {
       return mid;
-    } else if (sumOfTrees > M) {
+    } else if (sum > M) {
       left = mid+1;
     } else {
       right = mid-1;
