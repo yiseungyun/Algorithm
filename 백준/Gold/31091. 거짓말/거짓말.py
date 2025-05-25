@@ -1,34 +1,39 @@
-import sys
+import sys 
 input = sys.stdin.readline 
 
 N = int(input())
-K = list(map(int, input().split()))
- 
-U = [0 for _ in range(N+1)]
-L = [0 for _ in range(N+1)]
 
-for k in K:
-  if k >= 0:
-    U[k] += 1
-  if k <= 0: 
-    L[-k] += 1
+사람들 = list(map(int, input().split()))
+이상 = [0 for _ in range(N+1)]
+이하 = [0 for _ in range(N+1)]
+거짓말 = []
 
-# 누적합 배열
-US = [0 for _ in range(N+1)]
-LS = [0 for _ in range(N+1)] 
+for 사람 in 사람들:
+  if 사람 >= 0:
+    이상[사람] += 1
+  if 사람 <= 0:
+    이하[-사람] += 1
 
-LS[0] = 0
-for i in range(1, N+1):
-  LS[i] = LS[i-1] + L[i-1]
+이상_누적합 = [0 for _ in range(N+1)]
+이하_누적합 = [0 for _ in range(N+1)]
 
-US[N] = 0
+이상_누적합[N] = 이상[N]
 for i in range(N-1, -1, -1):
-  US[i] = US[i+1] + U[i+1] 
-  
-result = []
-for k in range(0, N+1):
-  if US[k]+LS[k] == k:
-    result.append(k)
+  이상_누적합[i] = 이상_누적합[i+1]+이상[i]
 
-print(len(result))
-print(*result)
+이하_누적합[0] = 이하[0]
+for i in range(1, N+1):
+  이하_누적합[i] = 이하_누적합[i-1]+이하[i]
+
+if 이상_누적합[1] == 0:
+  거짓말.append(0)
+
+for i in range(1, N):
+  if 이상_누적합[i+1]+이하_누적합[i-1] == i:
+    거짓말.append(i)
+
+if 이하_누적합[N-1] == N:
+  거짓말.append(N)
+
+print(len(거짓말))
+print(*거짓말)
