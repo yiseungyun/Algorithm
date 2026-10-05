@@ -5,11 +5,9 @@ using namespace std;
 
 vector<int> solution(vector<int> prices) {
     stack<int> st;
-    // 스택에 가격을 넣는데, 만약 현재 가격이 스택 top보다 작다면?
-    // 가격이 떨어진 순간, 이 순간 top은 가격이 떨어진 순간을 만났기에 기간을 기록하고 pop
-    // 그 다음 top도 확인해보기 
+    
     int n = (int)prices.size();
-    vector<int> period(n, n-1);
+    vector<int> period(n, 0);
     st.push(0);
     for (int i = 1; i < n; i++) {
         while (!st.empty()) {
@@ -24,7 +22,7 @@ vector<int> solution(vector<int> prices) {
         }
         st.push(i);
     }
-    
+     
     while (!st.empty()) { 
         int idx = st.top();
         period[idx] = n-idx-1;
