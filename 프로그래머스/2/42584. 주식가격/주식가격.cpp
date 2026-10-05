@@ -15,8 +15,7 @@ vector<int> solution(vector<int> prices) {
             if (prices[idx] > prices[i]) {
                 period[idx] = i-idx;
                 st.pop();
-            } else {
-                period[i] = n-i-1;
+            } else { 
                 break;
             }
         }
