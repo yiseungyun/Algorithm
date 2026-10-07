@@ -3,8 +3,8 @@
 
 using namespace std;
 
-void dfs(int node, vector<int> &visited, vector<vector<int>> computers) {
-    vector<int> adj = computers[node];
+void dfs(int node, vector<int> &visited, const vector<vector<int>> &computers) {
+    const vector<int> &adj = computers[node];
     visited[node] = 1;
     
     for (int i = 0; i < (int)adj.size(); i++) {
