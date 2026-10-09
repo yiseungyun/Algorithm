@@ -8,13 +8,15 @@ int solution(vector<int> citations) {
     int n = citations.size(); 
     int h_index = 0;
     for (int i = 0; i < n; i++) {
-        int h = citations[i]; 
-        int count = i+1;
+        int cite = citations[i]; // 인용 수
+        int count = i+1; // 논문 개수
         
-        if (h >= count) {
-            h_index = max(h_index, count);
+        if (cite >= count) { // 
+            h_index = count;
         } else {
             return h_index;
         }
     } 
+    
+    return h_index;
 }
