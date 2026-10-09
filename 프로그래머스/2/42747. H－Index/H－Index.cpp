@@ -9,9 +9,9 @@ int solution(vector<int> citations) {
     int h_index = 0;
     for (int i = 0; i < n; i++) {
         int cite = citations[i]; // 인용 수
-        int count = i+1; // 논문 개수
+        int count = i+1; // count = h 후보
         
-        if (cite >= count) { // 
+        if (cite >= count) { 
             h_index = count;
         } else {
             return h_index;
